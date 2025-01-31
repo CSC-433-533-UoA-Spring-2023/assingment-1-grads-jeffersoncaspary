@@ -227,3 +227,51 @@ class Vec3 {
         return Math.abs(v.normSq() - 1) < tolerance;
     }
 }
+// end given math.js code
+
+
+// 2x2 matrix constructor
+class Mat2 {
+constructor(a, b, c, d) {
+    this.m = [
+        [a, b],
+        [c, d]
+    ];
+}
+
+// identity matrix
+static identity() {
+    return new Mat2(1, 0, 0, 1);
+}
+
+// matrix multiplication w this matrix to another
+mMult(other) {
+    return new Mat2(
+        this.m[0][0] * other.m[0][0] + this.m[0][1] * other.m[1][0],
+        this.m[0][0] * other.m[0][1] + this.m[0][1] * other.m[1][1],
+        this.m[1][0] * other.m[0][0] + this.m[1][1] * other.m[1][0],
+        this.m[1][0] * other.m[0][1] + this.m[1][1] * other.m[1][1]
+    );
+}
+
+// matrix mult by single vector
+vMult(vec) {
+    return new Vec2(
+        this.m[0][0] * vec.x + this.m[0][1] * vec.y,
+        this.m[1][0] * vec.x + this.m[1][1] * vec.y
+    );
+}
+
+// scale matrix by some scalar value
+sMult(scalar) {
+    return new Mat2(
+        this.m[0][0] * scalar, this.m[0][1] * scalar,
+        this.m[1][0] * scalar, this.m[1][1] * scalar
+    );
+}
+
+// return matrix as a flattened array
+toArray() {
+    return this.m;
+}
+}
