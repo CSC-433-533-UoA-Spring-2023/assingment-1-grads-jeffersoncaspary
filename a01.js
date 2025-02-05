@@ -5,9 +5,6 @@
  Email: amesmaieeli@email.arizona.edu
  */
 
-
-
-
 //access DOM elements we'll use
 var input = document.getElementById("load_image");
 var canvas = document.getElementById('canvas');
@@ -183,6 +180,7 @@ function startRotation() {
        let rotationMatrix = getTransformMatrix(angle);
 
 
+
        ctx.clearRect(0, 0, canvas.width, canvas.height);
        ctx.save();
        ctx.translate(canvas.width / 2, canvas.height / 2);
@@ -191,12 +189,28 @@ function startRotation() {
            rotationMatrix.m[0][1], rotationMatrix.m[1][1],
            0, 0
        );
-
+    
+       
 
        // Draw image on canvas
        ctx.drawImage(offscreenCanvas, -ppm_img_data.width / 2, -ppm_img_data.height / 2);
        ctx.restore();
+       showMatrix(rotationMatrix.m);
+
    }, intervalTime);
+}
+
+
+
+// Show transformation matrix on HTML
+function showMatrix(matrix){
+    for(let i=0;i<matrix.length;i++){
+        for(let j=0;j<matrix[i].length;j++){
+            matrix[i][j]=Math.floor((matrix[i][j]*100))/100;
+        }
+    }
+    document.getElementById("row1").innerHTML = "row 1:[ " + matrix[0].toString().replaceAll(",",",\t") + " ]";
+    document.getElementById("row2").innerHTML = "row 2:[ " + matrix[1].toString().replaceAll(",",",\t") + " ]";
 }
 
 
