@@ -12,8 +12,8 @@ var ctx = canvas.getContext('2d');
 
 
 var ppm_img_data;
-var angle = 0; // Rotation angle in degrees
-var intervalTime = 200; // ~60 FPS
+var angle = 0; // in degrees
+var intervalTime = 200; // for controlling frames
 var offscreenCanvas, offscreenCtx;
 
 
